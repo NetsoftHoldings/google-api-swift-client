@@ -1,4 +1,4 @@
-// swift-tools-version:4.2
+// swift-tools-version:5.5
 
 // Copyright 2019 Google Inc. All Rights Reserved.
 //
@@ -20,7 +20,7 @@ import PackageDescription
 let package = Package(
   name: "Cloud Compute",
   dependencies: [
-    .package(url: "https://github.com/googleapis/google-auth-library-swift.git", from: "0.5.3"),
+    .package(url: "https://github.com/NetsoftHoldings/google-auth-library-swift.git", branch: "main"),
     .package(url: "https://github.com/kylef/Commander.git", .upToNextMinor(from: "0.9.2")),
     .package(path: "../../.."),
   ],
