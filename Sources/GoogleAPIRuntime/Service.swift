@@ -42,13 +42,12 @@ extension Parameterizable {
           case Optional<Any>.none:
             continue
           default:
-            print("failed to handle \(p) \(child.value)")
+            NSLog("failed to handle \(p) \(child.value)")
           }
           
         }
       }
     }
-    print("query: \(q)")
     return q
   }
   public func path(pattern: String) throws -> String {
@@ -63,12 +62,11 @@ extension Parameterizable {
           case Optional<Any>.none:
             throw GoogleAPIRuntimeError.missingPathParameter(p)            
           default:
-            print("failed to handle \(p) \(child.value)")
+            NSLog("failed to handle \(p) \(child.value)")
           }
         }
       }
     }
-    print("path: \(pattern)")
     return pattern
   }
 }
@@ -91,7 +89,6 @@ open class Service {
     if let error = error {
       completion(nil, error)
     } else if let data = data {
-      print(String(data:data, encoding:.utf8)!)
       do {
         let json = try JSONSerialization.jsonObject(with: data, options: [])
         let decoder = JSONDecoder()
@@ -110,7 +107,6 @@ open class Service {
         }
         completion(try decoder.decode(Z.self, from: data), nil)
       } catch {
-        print(String(data:data, encoding:.utf8)!)
         completion(nil, error)
       }
     } else {
