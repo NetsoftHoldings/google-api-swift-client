@@ -93,12 +93,15 @@ open class Service {
         let json = try JSONSerialization.jsonObject(with: data, options: [])
         let decoder = JSONDecoder()
         if let json = json as? [String:Any] {
-          if let errorPayload = json["error"] as? [String: Any],
-            let code = errorPayload["code"] as? Int {
+          if let errorPayload = json["error"] as? [String: Any] {
               return completion(nil, NSError(
                 domain: "GoogleAPIRuntime",
-                code: code,
-                userInfo: errorPayload))
+                code: errorPayload["code"] as? Int ?? (response as? HTTPURLResponse)?.statusCode ?? .zero,
+                userInfo: [
+                    NSLocalizedFailureErrorKey: errorPayload["status"],
+                    NSLocalizedFailureReasonErrorKey: errorPayload["message"],
+                    NSUnderlyingErrorKey: errorPayload,
+                ].compactMapValues { $0 }))
           } else if let payload = json["data"] {
             // remove the "data" wrapper that is used with some APIs (e.g. translate)
             let payloadData = try JSONSerialization.data(withJSONObject:payload)
