@@ -19,8 +19,8 @@ import GoogleAPIRuntime
 
 public class Bigquery : Service {
 
-  public init(tokenProvider: TokenProvider) throws {
-    try super.init(tokenProvider, "https://bigquery.googleapis.com/bigquery/v2/")
+  public init(tokenProvider: TokenProvider) {
+    super.init(tokenProvider, "https://bigquery.googleapis.com/bigquery/v2/")
   }
 
   public class Object : Codable {}

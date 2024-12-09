@@ -380,8 +380,8 @@ extension Discovery.Service {
     import GoogleAPIRuntime
     
     public class \(self.name.capitalized()) : Service {
-        public init(tokenProvider: TokenProvider) throws {
-            try super.init(tokenProvider, "\(self.baseUrl)")
+        public init(tokenProvider: TokenProvider) {
+            super.init(tokenProvider, "\(self.baseUrl)")
         }
     
     \(generatedSchemas)
